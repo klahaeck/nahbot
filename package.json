@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "kla.haeck@gmail.com",
   "license": "ISC",
   "dependencies": {
     "lodash": "^3.10.1",

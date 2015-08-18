@@ -2,7 +2,7 @@ var _ = require('lodash');
 var config = require('./config');
 var Twitter = require('twitter');
 
-if (process.env.NODE_ENV === 'local') {
+if (process.env.NODE_ENV !== 'production') {
   config = _.merge(config, require('./local.env.js'));
 }
 
