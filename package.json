@@ -4,7 +4,7 @@
   "description": "Autoreplay \"Nah\" on Twitter",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
