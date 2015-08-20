@@ -15,20 +15,37 @@ var client = new Twitter({
   access_token_secret: config.access_token_secret
 });
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var throttleDelay = getRandomArbitrary(1770000, 1830000);
+// var throttleDelay = getRandomArbitrary(5000, 10000);
+
+var elapsedTime = Date.now();
+elapsedTime += throttleDelay;
+
 client.stream('statuses/filter', {track: config.track}, function(stream) {
   stream.on('data', function(tweet) {
     if (tweet.user.screen_name !== config.screen_name) {
       // console.log(tweet.user.screen_name);
-      // console.log(tweet);
-      client.post('statuses/update', {
-        status: 'nah RT @' + tweet.user.screen_name + ': ' + tweet.text
-      }, function(err, tweet, response) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        // console.log(tweet.text);
-      });
+      // console.log(tweet.text);
+      var now = Date.now();
+      if (now >= elapsedTime) {
+        throttleDelay = getRandomArbitrary(1770000, 1830000);
+        // throttleDelay = getRandomArbitrary(5000, 10000);
+        elapsedTime = now + throttleDelay;
+        // console.log('post', throttleDelay);
+        client.post('statuses/update', {
+          status: 'nah RT @' + tweet.user.screen_name + ': ' + tweet.text
+        }, function(err, tweet, response) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          // console.log(tweet.text);
+        });
+      }
     }
   });
 
