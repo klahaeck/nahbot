@@ -5,8 +5,8 @@ var config = {
   consumer_secret: process.env.CONSUMER_SECRET,
   access_token_key: process.env.ACCESS_TOKEN_KEY,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-  screen_name: 'klahaeck',
-  track: 'or nah'
+  screen_name: process.env.SCREEN_NAME,
+  track: process.env.TRACK
 };
 
 module.exports = config;
